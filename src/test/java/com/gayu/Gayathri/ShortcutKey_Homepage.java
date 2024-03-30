@@ -21,7 +21,7 @@ import org.testng.annotations.Test;
 public class ShortcutKey_Homepage {
 	private RemoteWebDriver driver;
 	@BeforeTest
-	public void setup() throws MalformedURLException 
+	public void setup() throws MalformedURLException
 	{
 		DesiredCapabilities dc = DesiredCapabilities.chrome();
 		URL url = new URL("http://172.12.20.99:4444/wd/hub");
