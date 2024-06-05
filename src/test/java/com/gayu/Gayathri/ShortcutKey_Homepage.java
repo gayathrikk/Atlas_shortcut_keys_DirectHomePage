@@ -52,7 +52,7 @@ public class ShortcutKey_Homepage {
 		Thread.sleep(4000);
 		WebDriverWait wait2 = new WebDriverWait(driver,20);
 		WebElement  emailInput = wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='email']")));
-		emailInput.sendKeys("softwareteam45@gmail.com");
+		emailInput.sendKeys("softwaretestingteam9@gmail.com");
 		System.out.println("Mail I'd is entered");
 		WebDriverWait wait3 = new WebDriverWait(driver,20);
 		WebElement  Next = wait3.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Next']")));
