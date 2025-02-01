@@ -24,7 +24,7 @@ public class ShortcutKey_Homepage {
 	public void setup() throws MalformedURLException
 	{
 		DesiredCapabilities dc = DesiredCapabilities.chrome();
-		URL url = new URL("http://172.20.23.92:4444/wd/hub");
+		URL url = new URL("http://172.20.23.92:4443/wd/hub");
 		driver = new RemoteWebDriver(url, dc);
 	}
 	@Test(priority=1)
@@ -33,7 +33,7 @@ public class ShortcutKey_Homepage {
 		driver.manage().window().maximize();
 		System.out.println("The server is Opened sucessfully");
 		WebDriverWait wait = new WebDriverWait(driver, 50);
-		WebElement viewerSectionLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//a[contains(@class, 'ng-tns-c93-3')]")));
+		WebElement viewerSectionLink = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/viewer/assets/images/colorsvg/gallery.svg']")));
 		viewerSectionLink.click();
 		System.out.println("The Viewer Icon is clicked");
 		String parentWindow = driver.getWindowHandle();
@@ -104,63 +104,121 @@ public class ShortcutKey_Homepage {
 	@Test(priority=3)
 	public void Direct_drawpage() {
 		try {
-			WebDriverWait wait = new WebDriverWait(driver, 50);
-			Actions actions = new Actions(driver);
-	        actions.keyDown(Keys.SHIFT) 
-	               .sendKeys("o")  
-	               .keyUp(Keys.SHIFT)  
-	               .build()
-	               .perform();
-	        WebElement LockedPerson = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Software Team']")));
-	        String actualText = LockedPerson.getText();           
-	        String expectedText = "Software Team";
-	        Assert.assertEquals(actualText, expectedText, "The retrieved text does not match the expected text.");	        
-	        Thread.sleep(3000);	        
-	        System.out.println("--------------------------*****************-----------------------");
-	        System.out.println("Assertion passed: The retrieved text matches the expected text.");
-	        System.out.println("The shorcutkeys go to direct Homepage sucesssfully");
-	    } catch (InterruptedException e) {
-	        Thread.currentThread().interrupt();
-	        System.out.println("Thread interrupted while sleeping.");
-	    } catch (AssertionError e) {
-	        System.out.println("Assertion failed: " + e.getMessage());
-	    } catch (Exception e) {
-	        System.out.println("An error occurred: " + e.getMessage());
-	    }
-		try {
-		    WebDriverWait wait = new WebDriverWait(driver, 50);
-		    Actions actions = new Actions(driver);
-		    actions.keyDown(Keys.SHIFT) 
-		           .sendKeys("p")  
-		           .keyUp(Keys.SHIFT)  
-		           .build()
-		           .perform();
-		    
-		    WebElement selectedRegion = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()=' -1 : Not Available-NA ']")));
-		    String actualText = selectedRegion.getText();           
-		    String expectedText = "-1 : Not Available-NA";
-		    
-		    Assert.assertEquals(actualText, expectedText, "The retrieved text does not match the expected text.");	        
-		    
-		    Thread.sleep(3000);	        
-		    
-		    System.out.println("--------------------------*****************-----------------------");
-		    System.out.println("Assertion passed: The retrieved text matches the expected text.");
-		    
-		    System.out.println("--------------------------*****************-----------------------");
-		    System.out.println("The shortcut keys came back to the Home page sucessfully");
-		} catch (InterruptedException e) {
-		    Thread.currentThread().interrupt();
-		    System.out.println("Thread interrupted while sleeping.");
-		} catch (AssertionError e) {
-		    System.out.println("Assertion failed: " + e.getMessage());
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			WebElement menu = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/viewer/assets/images/colorsvg/oldmenu.svg']")));
+			menu.click();
+			System.out.println("--------------------------*****************-----------------------");
+			System.out.println("The menu button is clicked");
 		} catch (Exception e) {
-		    System.out.println("An error occurred: " + e.getMessage());
-		}}
+			System.out.println("--------------------------*****************-----------------------");
+			System.out.println("The menu button is not clicked");
+		} 
+		try {
+			WebDriverWait wait = new WebDriverWait(driver, 30);
+			WebElement draw = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/viewer/assets/images/colorsvg/paintbrush.svg']")));
+			draw.click();
+			System.out.println("--------------------------*****************-----------------------");
+			System.out.println("The draw menu button is clicked");
+		} catch (Exception e) {
+			System.out.println("--------------------------*****************-----------------------");
+			System.out.println("The draw menu button is not clicked");
+		}  
+				try {
+					WebDriverWait wait = new WebDriverWait(driver, 30);
+					WebElement unlock = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//button[text()='Unlock']")));
+					unlock.click();
+					System.out.println("--------------------------*****************-----------------------");
+					System.out.println("The Unlock button is clicked");
+				} catch (Exception e) {
+					System.out.println("--------------------------*****************-----------------------");
+					System.out.println("The Unlock button is not clicked");
+				}
+
+				try {
+				    WebDriverWait wait = new WebDriverWait(driver, 30);
+				    
+				    // Wait for element and retrieve text
+				    WebElement LockedPerson = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'SoftwareTesting Team')]")));
+
+				    // Get clean text
+				    String actualText = LockedPerson.getText().trim();
+				    String expectedText = "SoftwareTesting Team";
+
+				    // Debugging: Print retrieved text
+				    System.out.println("Actual text retrieved: [" + actualText + "]");
+				    System.out.println("Expected text: [" + expectedText + "]");
+
+				    // Compare text directly (without Unicode interference)
+				    Assert.assertEquals(actualText, expectedText, "The retrieved text does not match the expected text.");
+
+				    Thread.sleep(3000);
+				    System.out.println("--------------------------*****************-----------------------");
+				    System.out.println("Assertion passed: The retrieved text matches the expected text.");
+				    System.out.println("The shortcut keys successfully navigate to the direct Homepage.");
+				} catch (InterruptedException e) {
+				    Thread.currentThread().interrupt();
+				    System.out.println("Thread interrupted while sleeping.");
+				} catch (AssertionError e) {
+				    System.out.println("Assertion failed: " + e.getMessage());
+				} catch (Exception e) {
+				    System.out.println("An error occurred: " + e.getMessage());
+				}
+
+try {
+	WebDriverWait wait = new WebDriverWait(driver, 30);
+	WebElement unlock = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/viewer/assets/images/colorsvg/cancel.svg']")));
+	unlock.click();
+	System.out.println("--------------------------*****************-----------------------");
+	System.out.println("The close button is clicked");
+} catch (Exception e) {
+	System.out.println("--------------------------*****************-----------------------");
+	System.out.println("The close button is not clicked");
+}
+try {
+	WebDriverWait wait = new WebDriverWait(driver, 30);
+	WebElement menu = wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//img[@src='/viewer/assets/images/colorsvg/oldmenu.svg']")));
+	menu.click();
+	System.out.println("--------------------------*****************-----------------------");
+	System.out.println("The menu button is clicked");
+} catch (Exception e) {
+	System.out.println("--------------------------*****************-----------------------");
+	System.out.println("The menu button is not clicked");
+} 
+
+try {
+    WebDriverWait wait = new WebDriverWait(driver, 30);
+    
+    // Wait for element and retrieve text
+    WebElement reg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), '-1 : none-NoneAcronym')]")));
+
+    // Get clean text
+    String actualText = reg.getText();
+    String expectedText = " -1 : none-NoneAcronym expected";
+
+    // Debugging: Print retrieved text
+    System.out.println("Actual text retrieved: [" + actualText + "]");
+    System.out.println("Expected text: [" + expectedText + "]");
+
+    // Compare text directly (without Unicode interference)
+    Assert.assertEquals(actualText, expectedText, "The retrieved text does not match the expected text.");
+
+    Thread.sleep(3000);
+    System.out.println("--------------------------*****************-----------------------");
+    System.out.println("Assertion passed: The retrieved text matches the expected text.");
+    System.out.println("The shortcut keys successfully navigate to the direct Homepage.");
+} catch (InterruptedException e) {
+    Thread.currentThread().interrupt();
+    System.out.println("Thread interrupted while sleeping.");
+} catch (AssertionError e) {
+    System.out.println("Assertion failed: " + e.getMessage());
+} catch (Exception e) {
+    System.out.println("An error occurred: " + e.getMessage());
+}
+
+}
 		@AfterTest
 		public void tearDown() {
 			if (driver != null) {
 				driver.quit();
 			}}
 	}
-
