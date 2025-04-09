@@ -138,11 +138,11 @@ public class ShortcutKey_Homepage {
 				    WebDriverWait wait = new WebDriverWait(driver, 30);
 				    
 				    // Wait for element and retrieve text
-				    WebElement LockedPerson = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'SoftwareTesting Team')]")));
+				    WebElement LockedPerson = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[contains(text(), 'Software Team')]")));
 
 				    // Get clean text
 				    String actualText = LockedPerson.getText().trim();
-				    String expectedText = "SoftwareTesting Team";
+				    String expectedText = "Software Team";
 
 				    // Debugging: Print retrieved text
 				    System.out.println("Actual text retrieved: [" + actualText + "]");
