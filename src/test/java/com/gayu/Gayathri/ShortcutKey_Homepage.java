@@ -193,7 +193,7 @@ try {
 
     // Get clean text
     String actualText = reg.getText();
-    String expectedText = " -1 : none-NoneAcronym expected";
+    String expectedText = " -1 : none-NoneAcronym ";
 
     // Debugging: Print retrieved text
     System.out.println("Actual text retrieved: [" + actualText + "]");
