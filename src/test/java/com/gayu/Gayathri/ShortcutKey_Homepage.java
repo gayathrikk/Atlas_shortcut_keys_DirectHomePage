@@ -135,34 +135,39 @@ public class ShortcutKey_Homepage {
 				}
 
 				try {
-				    WebDriverWait wait = new WebDriverWait(driver, 30);
-				    
-				    // Wait for element and retrieve text
-				    WebElement LockedPerson = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//span[text()='Software Team']")));
+    WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(30));
 
-				    // Get clean text
-				    String actualText = LockedPerson.getText().trim();
-				    String expectedText = "Software Team";
+    // Wait for the element to be visible
+    WebElement lockedPerson = wait.until(ExpectedConditions.visibilityOfElementLocated(
+        By.xpath("//span[normalize-space(text())='Software Team']")));
 
-				    // Debugging: Print retrieved text
-				    System.out.println("Actual text retrieved: [" + actualText + "]");
-				    System.out.println("Expected text: [" + expectedText + "]");
+    // Retrieve and clean the text
+    String actualText = lockedPerson.getText().trim();
+    String expectedText = "Software Team";
 
-				    // Compare text directly (without Unicode interference)
-				    Assert.assertEquals(actualText, expectedText, "The retrieved text does not match the expected text.");
+    // Debugging: Print the actual and expected text
+    System.out.println("✅ Actual text retrieved: [" + actualText + "]");
+    System.out.println("📌 Expected text: [" + expectedText + "]");
 
-				    Thread.sleep(3000);
-				    System.out.println("--------------------------*****************-----------------------");
-				    System.out.println("Assertion passed: The retrieved text matches the expected text.");
-				    System.out.println("The shortcut keys successfully navigate to the direct Homepage.");
-				} catch (InterruptedException e) {
-				    Thread.currentThread().interrupt();
-				    System.out.println("Thread interrupted while sleeping.");
-				} catch (AssertionError e) {
-				    System.out.println("Assertion failed: " + e.getMessage());
-				} catch (Exception e) {
-				    System.out.println("An error occurred: " + e.getMessage());
-				}
+    // Assert the equality of texts
+    Assert.assertEquals(actualText, expectedText, "❌ The retrieved text does not match the expected text.");
+
+    // Pause for visibility (not usually recommended, but keeping as per original)
+    Thread.sleep(3000);
+
+    // Success messages
+    System.out.println("--------------------------*****************-----------------------");
+    System.out.println("✅ Assertion passed: The retrieved text matches the expected text.");
+    System.out.println("🏠 The shortcut keys successfully navigate to the direct Homepage.");
+    
+} catch (InterruptedException e) {
+    Thread.currentThread().interrupt(); // Restore the interrupted status
+    System.out.println("⚠️ Thread interrupted while sleeping.");
+} catch (AssertionError e) {
+    System.out.println("❌ Assertion failed: " + e.getMessage());
+} catch (Exception e) {
+    System.out.println("⚠️ An error occurred: " + e.getMessage());
+}
 
 try {
 	WebDriverWait wait = new WebDriverWait(driver, 30);
