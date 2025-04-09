@@ -24,7 +24,7 @@ public class ShortcutKey_Homepage {
 	public void setup() throws MalformedURLException
 	{
 		DesiredCapabilities dc = DesiredCapabilities.chrome();
-		URL url = new URL("http://172.20.23.92:4443/wd/hub");
+		URL url = new URL("http://172.20.23.92:4444/wd/hub");
 		driver = new RemoteWebDriver(url, dc);
 	}
 	@Test(priority=1)
@@ -52,7 +52,7 @@ public class ShortcutKey_Homepage {
 		Thread.sleep(4000);
 		WebDriverWait wait2 = new WebDriverWait(driver,20);
 		WebElement  emailInput = wait2.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@type='email']")));
-		emailInput.sendKeys("softwaretestingteam9@gmail.com");
+		emailInput.sendKeys("teamsoftware457@gmail.com");
 		System.out.println("Mail I'd is entered");
 		WebDriverWait wait3 = new WebDriverWait(driver,20);
 		WebElement  Next = wait3.until(ExpectedConditions.elementToBeClickable(By.xpath("//span[text()='Next']")));
